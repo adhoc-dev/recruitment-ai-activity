@@ -4,6 +4,8 @@ Un asistente de chat que responde preguntas sobre los datos de un ERP y usa tool
 
 `chat/api.py` y `chat/tokens.py` simulan la API del modelo y su forma de contar tokens. No los cambies: son del proveedor y no los controlamos.
 
+`run.py` le manda a la API simulada una conversación guardada en `fixtures/`. `long_chat.json` es una charla de 8 turnos con consultas de facturas, y `short_chat.json`, una de 2.
+
 ## El problema
 
 Con conversaciones largas, el chat se rompe:
@@ -20,7 +22,7 @@ Arreglalo.
 
 ```bash
 python3 -m venv .venv
-source .venv/bin/activate        # en Windows: .venv\Scripts\activate
+source .venv/bin/activate
 pip install pytest
 pytest
 python3 run.py fixtures/short_chat.json
