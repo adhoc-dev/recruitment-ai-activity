@@ -748,6 +748,6 @@
   },
   {
     "role": "user",
-    "content": "Bien. Ahora armame un resumen de todo lo que vimos para mandarle a cobranzas."
+    "content": "Pasame todas las facturas vencidas que vimos, con número y saldo, para cobranzas."
   }
 ]
