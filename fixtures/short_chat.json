@@ -1,7 +1,7 @@
 [
   {
     "role": "user",
-    "content": "¿Qué clientes nos deben más?"
+    "content": "¿Cuáles son las últimas facturas de Agro Pampa SA?"
   },
   {
     "role": "assistant",
@@ -12,15 +12,7 @@
         "type": "function",
         "function": {
           "name": "odoo_search_read",
-          "arguments": "{\"model\": \"account.move\", \"domain\": [[\"move_type\", \"=\", \"out_invoice\"], [\"partner_id.name\", \"ilike\", \"Farmacia Central\"]], \"fields\": [\"name\", \"partner_id\", \"invoice_date\", \"invoice_date_due\", \"amount_total\", \"amount_residual\", \"currency_id\", \"state\", \"payment_state\"], \"limit\": 3}"
-        }
-      },
-      {
-        "id": "call_002",
-        "type": "function",
-        "function": {
-          "name": "odoo_search_read",
-          "arguments": "{\"model\": \"account.move\", \"domain\": [[\"move_type\", \"=\", \"out_invoice\"], [\"partner_id.name\", \"ilike\", \"Farmacia Central\"]], \"fields\": [\"name\", \"partner_id\", \"invoice_date\", \"invoice_date_due\", \"amount_total\", \"amount_residual\", \"currency_id\", \"state\", \"payment_state\"], \"limit\": 3}"
+          "arguments": "{\"model\": \"account.move\", \"domain\": [[\"move_type\", \"=\", \"out_invoice\"], [\"partner_id\", \"=\", 103], [\"state\", \"=\", \"posted\"]], \"fields\": [\"name\", \"partner_id\", \"invoice_date\", \"invoice_date_due\", \"amount_total\", \"amount_residual\", \"currency_id\", \"state\", \"payment_state\"], \"limit\": 3, \"order\": \"invoice_date desc\"}"
         }
       }
     ]
@@ -28,72 +20,22 @@
   {
     "role": "tool",
     "tool_call_id": "call_001",
-    "content": "[{\"id\": 70453, \"name\": \"FA-A 0003-00006671\", \"partner_id\": [696, \"Lácteos del Sur SA\"], \"invoice_date\": \"2026-06-22\", \"invoice_date_due\": \"2026-06-13\", \"amount_total\": 2168705.06, \"amount_residual\": 1269439.17, \"currency_id\": [19, \"ARS\"], \"state\": \"draft\", \"payment_state\": \"paid\"}, {\"id\": 25707, \"name\": \"FA-A 0003-00001088\", \"partner_id\": [799, \"Textil Norte SA\"], \"invoice_date\": \"2026-08-03\", \"invoice_date_due\": \"2026-08-14\", \"amount_total\": 1902023.21, \"amount_residual\": 1024775.21, \"currency_id\": [19, \"USD\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 64590, \"name\": \"FA-A 0003-00002797\", \"partner_id\": [458, \"Agro Pampa SA\"], \"invoice_date\": \"2026-06-01\", \"invoice_date_due\": \"2026-06-13\", \"amount_total\": 2283879.15, \"amount_residual\": 752045.58, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}]"
-  },
-  {
-    "role": "tool",
-    "tool_call_id": "call_002",
-    "content": "[{\"id\": 53790, \"name\": \"FA-A 0003-00003616\", \"partner_id\": [158, \"Metalúrgica Quilmes SRL\"], \"invoice_date\": \"2026-10-04\", \"invoice_date_due\": \"2026-10-14\", \"amount_total\": 674880.71, \"amount_residual\": 260506.7, \"currency_id\": [19, \"USD\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 57381, \"name\": \"FA-A 0003-00003893\", \"partner_id\": [896, \"Metalúrgica Quilmes SRL\"], \"invoice_date\": \"2026-06-05\", \"invoice_date_due\": \"2026-06-16\", \"amount_total\": 1831189.78, \"amount_residual\": 237283.36, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 95074, \"name\": \"FA-A 0003-00001326\", \"partner_id\": [454, \"Panificadora La Espiga\"], \"invoice_date\": \"2026-06-18\", \"invoice_date_due\": \"2026-06-25\", \"amount_total\": 2180504.94, \"amount_residual\": 262795.6, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}]"
+    "content": "[{\"id\": 20198, \"name\": \"FA-A 00003-00002029\", \"partner_id\": [103, \"Agro Pampa SA\"], \"invoice_date\": \"2026-10-04\", \"invoice_date_due\": \"2026-11-03\", \"amount_total\": 482824.97, \"amount_residual\": 206039.07, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"partial\"}, {\"id\": 20192, \"name\": \"FA-A 00003-00002023\", \"partner_id\": [103, \"Agro Pampa SA\"], \"invoice_date\": \"2026-10-01\", \"invoice_date_due\": \"2026-10-31\", \"amount_total\": 1875806.12, \"amount_residual\": 1875806.12, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20190, \"name\": \"FA-A 00003-00002021\", \"partner_id\": [103, \"Agro Pampa SA\"], \"invoice_date\": \"2026-09-29\", \"invoice_date_due\": \"2026-10-29\", \"amount_total\": 1636987.27, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}]"
   },
   {
     "role": "assistant",
-    "content": "Encontré 3 facturas. Las más relevantes son FA-A 0003-00005285, FA-A 0003-00009672, FA-A 0003-00005095. El saldo pendiente total es $ 18,073,208.34. ¿Querés que lo abra por cliente o por mes?"
+    "content": "Las últimas tres son FA-A 00003-00002029, FA-A 00003-00002023, FA-A 00003-00002021, por $ 3.995.618,36."
   },
   {
     "role": "user",
-    "content": "¿Y de esos, cuáles tienen facturas vencidas?"
+    "content": "¿Cuál vence primero?"
   },
   {
     "role": "assistant",
-    "content": null,
-    "tool_calls": [
-      {
-        "id": "call_003",
-        "type": "function",
-        "function": {
-          "name": "odoo_search_read",
-          "arguments": "{\"model\": \"account.move\", \"domain\": [[\"move_type\", \"=\", \"out_invoice\"], [\"partner_id.name\", \"ilike\", \"Bodega Altos del Valle\"]], \"fields\": [\"name\", \"partner_id\", \"invoice_date\", \"invoice_date_due\", \"amount_total\", \"amount_residual\", \"currency_id\", \"state\", \"payment_state\"], \"limit\": 3}"
-        }
-      },
-      {
-        "id": "call_004",
-        "type": "function",
-        "function": {
-          "name": "odoo_search_read",
-          "arguments": "{\"model\": \"account.move\", \"domain\": [[\"move_type\", \"=\", \"out_invoice\"], [\"partner_id.name\", \"ilike\", \"Agro Pampa SA\"]], \"fields\": [\"name\", \"partner_id\", \"invoice_date\", \"invoice_date_due\", \"amount_total\", \"amount_residual\", \"currency_id\", \"state\", \"payment_state\"], \"limit\": 3}"
-        }
-      },
-      {
-        "id": "call_005",
-        "type": "function",
-        "function": {
-          "name": "odoo_search_read",
-          "arguments": "{\"model\": \"account.move\", \"domain\": [[\"move_type\", \"=\", \"out_invoice\"], [\"partner_id.name\", \"ilike\", \"Bodega Altos del Valle\"]], \"fields\": [\"name\", \"partner_id\", \"invoice_date\", \"invoice_date_due\", \"amount_total\", \"amount_residual\", \"currency_id\", \"state\", \"payment_state\"], \"limit\": 3}"
-        }
-      }
-    ]
-  },
-  {
-    "role": "tool",
-    "tool_call_id": "call_003",
-    "content": "[{\"id\": 54556, \"name\": \"FA-A 0003-00002123\", \"partner_id\": [990, \"Lácteos del Sur SA\"], \"invoice_date\": \"2026-06-20\", \"invoice_date_due\": \"2026-06-07\", \"amount_total\": 2387962.86, \"amount_residual\": 187066.81, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 21465, \"name\": \"FA-A 0003-00002014\", \"partner_id\": [127, \"Agro Pampa SA\"], \"invoice_date\": \"2026-08-13\", \"invoice_date_due\": \"2026-08-09\", \"amount_total\": 3739739.61, \"amount_residual\": 741230.19, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20904, \"name\": \"FA-A 0003-00005486\", \"partner_id\": [251, \"Ferretería Los Andes SA\"], \"invoice_date\": \"2026-09-01\", \"invoice_date_due\": \"2026-09-07\", \"amount_total\": 3659976.74, \"amount_residual\": 238895.56, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"partial\"}]"
-  },
-  {
-    "role": "tool",
-    "tool_call_id": "call_004",
-    "content": "[{\"id\": 49563, \"name\": \"FA-A 0003-00002303\", \"partner_id\": [419, \"Lácteos del Sur SA\"], \"invoice_date\": \"2026-05-03\", \"invoice_date_due\": \"2026-05-03\", \"amount_total\": 3486887.13, \"amount_residual\": 1290769.91, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 29001, \"name\": \"FA-A 0003-00008600\", \"partner_id\": [383, \"Distribuidora Río Negro SRL\"], \"invoice_date\": \"2026-05-25\", \"invoice_date_due\": \"2026-05-25\", \"amount_total\": 3100445.58, \"amount_residual\": 1074395.48, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"partial\"}, {\"id\": 71440, \"name\": \"FA-A 0003-00003906\", \"partner_id\": [189, \"Distribuidora Río Negro SRL\"], \"invoice_date\": \"2026-10-13\", \"invoice_date_due\": \"2026-10-15\", \"amount_total\": 1501695.96, \"amount_residual\": 1078711.13, \"currency_id\": [19, \"ARS\"], \"state\": \"draft\", \"payment_state\": \"paid\"}]"
-  },
-  {
-    "role": "tool",
-    "tool_call_id": "call_005",
-    "content": "[{\"id\": 41110, \"name\": \"FA-A 0003-00008152\", \"partner_id\": [715, \"Bodega Altos del Valle\"], \"invoice_date\": \"2026-08-17\", \"invoice_date_due\": \"2026-08-18\", \"amount_total\": 2161491.05, \"amount_residual\": 1035283.51, \"currency_id\": [19, \"USD\"], \"state\": \"draft\", \"payment_state\": \"partial\"}, {\"id\": 53292, \"name\": \"FA-A 0003-00004479\", \"partner_id\": [374, \"Lácteos del Sur SA\"], \"invoice_date\": \"2026-06-12\", \"invoice_date_due\": \"2026-06-28\", \"amount_total\": 3302298.19, \"amount_residual\": 568573.64, \"currency_id\": [19, \"ARS\"], \"state\": \"draft\", \"payment_state\": \"paid\"}, {\"id\": 45435, \"name\": \"FA-A 0003-00003480\", \"partner_id\": [319, \"Clínica San Martín\"], \"invoice_date\": \"2026-06-28\", \"invoice_date_due\": \"2026-06-24\", \"amount_total\": 3235010.97, \"amount_residual\": 1428348.24, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}]"
-  },
-  {
-    "role": "assistant",
-    "content": "Encontré 3 facturas. Las más relevantes son FA-A 0003-00003905, FA-A 0003-00005212, FA-A 0003-00003316. El saldo pendiente total es $ 6,803,308.55. ¿Querés que lo abra por cliente o por mes?"
+    "content": "La FA-A 00003-00002021, que vence el 2026-10-29."
   },
   {
     "role": "user",
-    "content": "Bien. Ahora armame un resumen de todo lo que vimos para mandarle a cobranzas."
+    "content": "¿Y cuánto queda por cobrar de esas tres?"
   }
 ]

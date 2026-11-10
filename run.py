@@ -1,5 +1,6 @@
 import json
 import sys
+from pathlib import Path
 
 from chat.api import send
 from chat.context import build_messages
@@ -16,4 +17,4 @@ def main(path: str) -> None:
 
 
 if __name__ == "__main__":
-    main(sys.argv[1] if len(sys.argv) > 1 else "fixtures/short_chat.json")
+    main(sys.argv[1] if len(sys.argv) > 1 else str(Path(__file__).parent / "fixtures" / "short_chat.json"))
