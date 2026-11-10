@@ -40,12 +40,13 @@ def _check_tool_messages(messages: list[dict]) -> None:
                 f"followed by tool messages responding to each 'tool_call_id' "
                 f"(missing: {sorted(pending)})."
             )
-        if msg["role"] == "assistant" and not msg.get("content") and not msg.get("tool_calls"):
-            raise InvalidRequest(
-                f"messages[{i}]: 'content' is required unless 'tool_calls' is specified."
-            )
-        if msg["role"] == "assistant" and msg.get("tool_calls"):
-            pending = {call["id"] for call in msg["tool_calls"]}
+        if msg["role"] == "assistant":
+            if msg.get("tool_calls"):
+                pending = {call["id"] for call in msg["tool_calls"]}
+            elif not msg.get("content"):
+                raise InvalidRequest(
+                    f"messages[{i}]: 'content' is required unless 'tool_calls' is specified."
+                )
     if pending:
         raise InvalidRequest(
             "an assistant message with 'tool_calls' must be followed by tool "

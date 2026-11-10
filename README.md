@@ -12,7 +12,7 @@ Con conversaciones largas, el chat se rompe:
 python3 run.py fixtures/long_chat.json
 ```
 
-Además, cobranzas se queja de que en las charlas largas el asistente se olvida de lo que ya consultó, y finanzas, de que cada respuesta cuesta cada vez más.
+Además, finanzas se queja de que cada respuesta cuesta cada vez más, y cobranzas ya avisó que, cuando lo arreglemos, el asistente no se puede olvidar de lo que ya consultó en la charla.
 
 Arreglalo.
 

@@ -7,9 +7,8 @@ from chat.context import build_messages
 from chat.tokens import count_messages
 
 
-def main(path: str) -> None:
-    with open(path, encoding="utf-8") as f:
-        history = json.load(f)
+def main(path: Path) -> None:
+    history = json.loads(path.read_text(encoding="utf-8"))
     messages = build_messages(history)
     print(f"history: {len(history)} messages")
     print(f"sending: {len(messages)} messages, {count_messages(messages)} tokens")
@@ -17,4 +16,4 @@ def main(path: str) -> None:
 
 
 if __name__ == "__main__":
-    main(sys.argv[1] if len(sys.argv) > 1 else str(Path(__file__).parent / "fixtures" / "short_chat.json"))
+    main(Path(sys.argv[1]) if len(sys.argv) > 1 else Path(__file__).parent / "fixtures" / "short_chat.json")
