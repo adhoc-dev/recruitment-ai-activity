@@ -1,5 +1,3 @@
-"""Fake model API. It applies the same two checks as the real provider."""
-
 from chat.tokens import count_messages
 
 CONTEXT_LIMIT = 8_000
@@ -41,6 +39,10 @@ def _check_tool_messages(messages: list[dict]) -> None:
                 f"messages[{i}]: an assistant message with 'tool_calls' must be "
                 f"followed by tool messages responding to each 'tool_call_id' "
                 f"(missing: {sorted(pending)})."
+            )
+        if msg["role"] == "assistant" and not msg.get("content") and not msg.get("tool_calls"):
+            raise InvalidRequest(
+                f"messages[{i}]: 'content' is required unless 'tool_calls' is specified."
             )
         if msg["role"] == "assistant" and msg.get("tool_calls"):
             pending = {call["id"] for call in msg["tool_calls"]}
