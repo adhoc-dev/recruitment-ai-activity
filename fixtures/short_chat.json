@@ -1,0 +1,41 @@
+[
+  {
+    "role": "user",
+    "content": "¿Cuáles son las últimas facturas de Agro Pampa SA?"
+  },
+  {
+    "role": "assistant",
+    "content": null,
+    "tool_calls": [
+      {
+        "id": "call_001",
+        "type": "function",
+        "function": {
+          "name": "odoo_search_read",
+          "arguments": "{\"model\": \"account.move\", \"domain\": [[\"move_type\", \"=\", \"out_invoice\"], [\"partner_id\", \"=\", 103], [\"state\", \"=\", \"posted\"]], \"fields\": [\"name\", \"partner_id\", \"invoice_date\", \"invoice_date_due\", \"amount_total\", \"amount_residual\", \"currency_id\", \"state\", \"payment_state\"], \"limit\": 3, \"order\": \"invoice_date desc\"}"
+        }
+      }
+    ]
+  },
+  {
+    "role": "tool",
+    "tool_call_id": "call_001",
+    "content": "[{\"id\": 20198, \"name\": \"FA-A 00003-00002029\", \"partner_id\": [103, \"Agro Pampa SA\"], \"invoice_date\": \"2026-10-04\", \"invoice_date_due\": \"2026-11-03\", \"amount_total\": 482824.97, \"amount_residual\": 206039.07, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"partial\"}, {\"id\": 20192, \"name\": \"FA-A 00003-00002023\", \"partner_id\": [103, \"Agro Pampa SA\"], \"invoice_date\": \"2026-10-01\", \"invoice_date_due\": \"2026-10-31\", \"amount_total\": 1875806.12, \"amount_residual\": 1875806.12, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20190, \"name\": \"FA-A 00003-00002021\", \"partner_id\": [103, \"Agro Pampa SA\"], \"invoice_date\": \"2026-09-29\", \"invoice_date_due\": \"2026-10-29\", \"amount_total\": 1636987.27, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}]"
+  },
+  {
+    "role": "assistant",
+    "content": "Las últimas tres son FA-A 00003-00002029, FA-A 00003-00002023, FA-A 00003-00002021, por $ 3.995.618,36."
+  },
+  {
+    "role": "user",
+    "content": "¿Cuál vence primero?"
+  },
+  {
+    "role": "assistant",
+    "content": "La FA-A 00003-00002021, que vence el 2026-10-29."
+  },
+  {
+    "role": "user",
+    "content": "¿Y cuánto queda por cobrar de esas tres?"
+  }
+]

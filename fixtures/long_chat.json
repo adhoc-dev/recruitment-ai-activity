@@ -1,0 +1,255 @@
+[
+  {
+    "role": "user",
+    "content": "¿Cuál fue la factura más grande de octubre?"
+  },
+  {
+    "role": "assistant",
+    "content": null,
+    "tool_calls": [
+      {
+        "id": "call_001",
+        "type": "function",
+        "function": {
+          "name": "odoo_search_read",
+          "arguments": "{\"model\": \"account.move\", \"domain\": [[\"move_type\", \"=\", \"out_invoice\"], [\"state\", \"=\", \"posted\"], [\"invoice_date\", \">=\", \"2026-10-01\"], [\"invoice_date\", \"<\", \"2026-11-01\"]], \"fields\": [\"name\", \"partner_id\", \"invoice_date\", \"invoice_date_due\", \"amount_total\", \"amount_residual\", \"currency_id\", \"state\", \"payment_state\"], \"limit\": 5, \"order\": \"amount_total desc\"}"
+        }
+      }
+    ]
+  },
+  {
+    "role": "tool",
+    "tool_call_id": "call_001",
+    "content": "[{\"id\": 20202, \"name\": \"FA-A 00003-00002030\", \"partner_id\": [105, \"Metalúrgica Quilmes SRL\"], \"invoice_date\": \"2026-10-08\", \"invoice_date_due\": \"2026-11-07\", \"amount_total\": 4461189.7, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20213, \"name\": \"FA-A 00003-00002041\", \"partner_id\": [103, \"Agro Pampa SA\"], \"invoice_date\": \"2026-10-19\", \"invoice_date_due\": \"2026-11-18\", \"amount_total\": 4422913.26, \"amount_residual\": 4422913.26, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20211, \"name\": \"FA-A 00003-00002039\", \"partner_id\": [101, \"Ferretería Los Andes SA\"], \"invoice_date\": \"2026-10-18\", \"invoice_date_due\": \"2026-11-17\", \"amount_total\": 4290324.77, \"amount_residual\": 4290324.77, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20222, \"name\": \"FA-A 00003-00002050\", \"partner_id\": [104, \"Lácteos del Sur SA\"], \"invoice_date\": \"2026-10-27\", \"invoice_date_due\": \"2026-11-26\", \"amount_total\": 4128620.72, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20204, \"name\": \"FA-A 00003-00002032\", \"partner_id\": [108, \"Bodega Altos del Valle\"], \"invoice_date\": \"2026-10-12\", \"invoice_date_due\": \"2026-11-11\", \"amount_total\": 4114414.64, \"amount_residual\": 4114414.64, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}]"
+  },
+  {
+    "role": "assistant",
+    "content": "La más grande de octubre es la FA-A 00003-00002030, de Metalúrgica Quilmes SRL, por $ 4.461.189,70."
+  },
+  {
+    "role": "user",
+    "content": "¿Qué facturas en dólares están impagas?"
+  },
+  {
+    "role": "assistant",
+    "content": null,
+    "tool_calls": [
+      {
+        "id": "call_002",
+        "type": "function",
+        "function": {
+          "name": "odoo_search_read",
+          "arguments": "{\"model\": \"account.move\", \"domain\": [[\"move_type\", \"=\", \"out_invoice\"], [\"state\", \"=\", \"posted\"], [\"amount_residual\", \">\", 0], [\"currency_id.name\", \"=\", \"USD\"]], \"fields\": [\"name\", \"partner_id\", \"invoice_date\", \"invoice_date_due\", \"amount_total\", \"amount_residual\", \"currency_id\", \"state\", \"payment_state\"], \"limit\": 80}"
+        }
+      }
+    ]
+  },
+  {
+    "role": "tool",
+    "tool_call_id": "call_002",
+    "content": "[{\"id\": 20023, \"name\": \"FA-A 00003-00001864\", \"partner_id\": [103, \"Agro Pampa SA\"], \"invoice_date\": \"2026-05-18\", \"invoice_date_due\": \"2026-06-17\", \"amount_total\": 8889.34, \"amount_residual\": 8889.34, \"currency_id\": [2, \"USD\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20036, \"name\": \"FA-A 00003-00001876\", \"partner_id\": [111, \"Constructora Delta SRL\"], \"invoice_date\": \"2026-05-26\", \"invoice_date_due\": \"2026-06-25\", \"amount_total\": 14039.55, \"amount_residual\": 14039.55, \"currency_id\": [2, \"USD\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20040, \"name\": \"FA-A 00003-00001880\", \"partner_id\": [107, \"Panificadora La Espiga\"], \"invoice_date\": \"2026-05-30\", \"invoice_date_due\": \"2026-06-29\", \"amount_total\": 11622.27, \"amount_residual\": 11622.27, \"currency_id\": [2, \"USD\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20118, \"name\": \"FA-A 00003-00001950\", \"partner_id\": [104, \"Lácteos del Sur SA\"], \"invoice_date\": \"2026-07-29\", \"invoice_date_due\": \"2026-08-28\", \"amount_total\": 1221.92, \"amount_residual\": 1221.92, \"currency_id\": [2, \"USD\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20128, \"name\": \"FA-A 00003-00001960\", \"partner_id\": [112, \"Farmacia Central\"], \"invoice_date\": \"2026-08-09\", \"invoice_date_due\": \"2026-09-08\", \"amount_total\": 16055.43, \"amount_residual\": 11225.18, \"currency_id\": [2, \"USD\"], \"state\": \"posted\", \"payment_state\": \"partial\"}, {\"id\": 20133, \"name\": \"FA-A 00003-00001964\", \"partner_id\": [105, \"Metalúrgica Quilmes SRL\"], \"invoice_date\": \"2026-08-13\", \"invoice_date_due\": \"2026-09-12\", \"amount_total\": 22437.54, \"amount_residual\": 22437.54, \"currency_id\": [2, \"USD\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20135, \"name\": \"FA-A 00003-00001966\", \"partner_id\": [101, \"Ferretería Los Andes SA\"], \"invoice_date\": \"2026-08-14\", \"invoice_date_due\": \"2026-09-13\", \"amount_total\": 14242.43, \"amount_residual\": 14242.43, \"currency_id\": [2, \"USD\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20181, \"name\": \"FA-A 00003-00002010\", \"partner_id\": [110, \"Clínica San Martín\"], \"invoice_date\": \"2026-09-22\", \"invoice_date_due\": \"2026-10-22\", \"amount_total\": 12768.71, \"amount_residual\": 12768.71, \"currency_id\": [2, \"USD\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}]"
+  },
+  {
+    "role": "assistant",
+    "content": "Hay 8 en dólares con saldo, por USD 96.446,94: FA-A 00003-00001864, FA-A 00003-00001876, FA-A 00003-00001880, FA-A 00003-00001950."
+  },
+  {
+    "role": "user",
+    "content": "Compará lo que nos debe Lácteos del Sur SA con lo que nos debe Ferretería Los Andes SA"
+  },
+  {
+    "role": "assistant",
+    "content": null,
+    "tool_calls": [
+      {
+        "id": "call_003",
+        "type": "function",
+        "function": {
+          "name": "odoo_search_read",
+          "arguments": "{\"model\": \"account.move\", \"domain\": [[\"move_type\", \"=\", \"out_invoice\"], [\"partner_id\", \"=\", 104], [\"state\", \"=\", \"posted\"], [\"amount_residual\", \">\", 0]], \"fields\": [\"name\", \"partner_id\", \"invoice_date\", \"invoice_date_due\", \"amount_total\", \"amount_residual\", \"currency_id\", \"state\", \"payment_state\"], \"limit\": 80}"
+        }
+      },
+      {
+        "id": "call_004",
+        "type": "function",
+        "function": {
+          "name": "odoo_search_read",
+          "arguments": "{\"model\": \"account.move\", \"domain\": [[\"move_type\", \"=\", \"out_invoice\"], [\"partner_id\", \"=\", 101], [\"state\", \"=\", \"posted\"], [\"amount_residual\", \">\", 0]], \"fields\": [\"name\", \"partner_id\", \"invoice_date\", \"invoice_date_due\", \"amount_total\", \"amount_residual\", \"currency_id\", \"state\", \"payment_state\"], \"limit\": 80}"
+        }
+      }
+    ]
+  },
+  {
+    "role": "tool",
+    "tool_call_id": "call_003",
+    "content": "[{\"id\": 20064, \"name\": \"FA-A 00003-00001901\", \"partner_id\": [104, \"Lácteos del Sur SA\"], \"invoice_date\": \"2026-06-13\", \"invoice_date_due\": \"2026-07-13\", \"amount_total\": 398641.45, \"amount_residual\": 398641.45, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20118, \"name\": \"FA-A 00003-00001950\", \"partner_id\": [104, \"Lácteos del Sur SA\"], \"invoice_date\": \"2026-07-29\", \"invoice_date_due\": \"2026-08-28\", \"amount_total\": 1221.92, \"amount_residual\": 1221.92, \"currency_id\": [2, \"USD\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20167, \"name\": \"FA-A 00003-00001997\", \"partner_id\": [104, \"Lácteos del Sur SA\"], \"invoice_date\": \"2026-09-06\", \"invoice_date_due\": \"2026-10-06\", \"amount_total\": 1630571.54, \"amount_residual\": 1630571.54, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20219, \"name\": \"FA-A 00003-00002047\", \"partner_id\": [104, \"Lácteos del Sur SA\"], \"invoice_date\": \"2026-10-26\", \"invoice_date_due\": \"2026-11-25\", \"amount_total\": 1049564.55, \"amount_residual\": 1049564.55, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}]"
+  },
+  {
+    "role": "tool",
+    "tool_call_id": "call_004",
+    "content": "[{\"id\": 20009, \"name\": \"FA-A 00003-00001850\", \"partner_id\": [101, \"Ferretería Los Andes SA\"], \"invoice_date\": \"2026-05-07\", \"invoice_date_due\": \"2026-06-06\", \"amount_total\": 3154331.7, \"amount_residual\": 2250630.12, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"partial\"}, {\"id\": 20018, \"name\": \"FA-A 00003-00001859\", \"partner_id\": [101, \"Ferretería Los Andes SA\"], \"invoice_date\": \"2026-05-13\", \"invoice_date_due\": \"2026-06-12\", \"amount_total\": 85784.79, \"amount_residual\": 85784.79, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20043, \"name\": \"FA-A 00003-00001882\", \"partner_id\": [101, \"Ferretería Los Andes SA\"], \"invoice_date\": \"2026-06-01\", \"invoice_date_due\": \"2026-07-01\", \"amount_total\": 3705460.39, \"amount_residual\": 3705460.39, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20084, \"name\": \"FA-A 00003-00001920\", \"partner_id\": [101, \"Ferretería Los Andes SA\"], \"invoice_date\": \"2026-06-27\", \"invoice_date_due\": \"2026-07-27\", \"amount_total\": 297876.48, \"amount_residual\": 297876.48, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20113, \"name\": \"FA-A 00003-00001946\", \"partner_id\": [101, \"Ferretería Los Andes SA\"], \"invoice_date\": \"2026-07-23\", \"invoice_date_due\": \"2026-08-22\", \"amount_total\": 584431.51, \"amount_residual\": 358742.84, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"partial\"}, {\"id\": 20135, \"name\": \"FA-A 00003-00001966\", \"partner_id\": [101, \"Ferretería Los Andes SA\"], \"invoice_date\": \"2026-08-14\", \"invoice_date_due\": \"2026-09-13\", \"amount_total\": 14242.43, \"amount_residual\": 14242.43, \"currency_id\": [2, \"USD\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20159, \"name\": \"FA-A 00003-00001990\", \"partner_id\": [101, \"Ferretería Los Andes SA\"], \"invoice_date\": \"2026-09-02\", \"invoice_date_due\": \"2026-10-02\", \"amount_total\": 1467701.28, \"amount_residual\": 362125.82, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"partial\"}, {\"id\": 20176, \"name\": \"FA-A 00003-00002005\", \"partner_id\": [101, \"Ferretería Los Andes SA\"], \"invoice_date\": \"2026-09-15\", \"invoice_date_due\": \"2026-10-15\", \"amount_total\": 2521230.33, \"amount_residual\": 2521230.33, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20211, \"name\": \"FA-A 00003-00002039\", \"partner_id\": [101, \"Ferretería Los Andes SA\"], \"invoice_date\": \"2026-10-18\", \"invoice_date_due\": \"2026-11-17\", \"amount_total\": 4290324.77, \"amount_residual\": 4290324.77, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}]"
+  },
+  {
+    "role": "assistant",
+    "content": "Lácteos del Sur SA debe $ 3.078.777,54 y USD 1.221,92 en 4 facturas. Ferretería Los Andes SA debe $ 13.872.175,54 y USD 14.242,43 en 9 facturas."
+  },
+  {
+    "role": "user",
+    "content": "¿Cuánto facturamos en mayo y julio?"
+  },
+  {
+    "role": "assistant",
+    "content": null,
+    "tool_calls": [
+      {
+        "id": "call_005",
+        "type": "function",
+        "function": {
+          "name": "odoo_search_read",
+          "arguments": "{\"model\": \"account.move\", \"domain\": [[\"move_type\", \"=\", \"out_invoice\"], [\"state\", \"=\", \"posted\"], [\"invoice_date\", \">=\", \"2026-05-01\"], [\"invoice_date\", \"<\", \"2026-06-01\"]], \"fields\": [\"name\", \"partner_id\", \"invoice_date\", \"invoice_date_due\", \"amount_total\", \"amount_residual\", \"currency_id\", \"state\", \"payment_state\"], \"limit\": 80}"
+        }
+      },
+      {
+        "id": "call_006",
+        "type": "function",
+        "function": {
+          "name": "odoo_search_read",
+          "arguments": "{\"model\": \"account.move\", \"domain\": [[\"move_type\", \"=\", \"out_invoice\"], [\"state\", \"=\", \"posted\"], [\"invoice_date\", \">=\", \"2026-07-01\"], [\"invoice_date\", \"<\", \"2026-08-01\"]], \"fields\": [\"name\", \"partner_id\", \"invoice_date\", \"invoice_date_due\", \"amount_total\", \"amount_residual\", \"currency_id\", \"state\", \"payment_state\"], \"limit\": 80}"
+        }
+      }
+    ]
+  },
+  {
+    "role": "tool",
+    "tool_call_id": "call_005",
+    "content": "[{\"id\": 20000, \"name\": \"FA-A 00003-00001841\", \"partner_id\": [104, \"Lácteos del Sur SA\"], \"invoice_date\": \"2026-05-01\", \"invoice_date_due\": \"2026-05-31\", \"amount_total\": 1013119.35, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20001, \"name\": \"FA-A 00003-00001842\", \"partner_id\": [103, \"Agro Pampa SA\"], \"invoice_date\": \"2026-05-01\", \"invoice_date_due\": \"2026-05-31\", \"amount_total\": 1781547.69, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20002, \"name\": \"FA-A 00003-00001843\", \"partner_id\": [112, \"Farmacia Central\"], \"invoice_date\": \"2026-05-01\", \"invoice_date_due\": \"2026-05-31\", \"amount_total\": 1375001.53, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20003, \"name\": \"FA-A 00003-00001844\", \"partner_id\": [110, \"Clínica San Martín\"], \"invoice_date\": \"2026-05-02\", \"invoice_date_due\": \"2026-06-01\", \"amount_total\": 2682614.89, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20004, \"name\": \"FA-A 00003-00001845\", \"partner_id\": [106, \"Transportes Cuyo SA\"], \"invoice_date\": \"2026-05-02\", \"invoice_date_due\": \"2026-06-01\", \"amount_total\": 1695813.07, \"amount_residual\": 1695813.07, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20005, \"name\": \"FA-A 00003-00001846\", \"partner_id\": [106, \"Transportes Cuyo SA\"], \"invoice_date\": \"2026-05-02\", \"invoice_date_due\": \"2026-06-01\", \"amount_total\": 1784742.5, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20006, \"name\": \"FA-A 00003-00001847\", \"partner_id\": [108, \"Bodega Altos del Valle\"], \"invoice_date\": \"2026-05-03\", \"invoice_date_due\": \"2026-06-02\", \"amount_total\": 3031682.36, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20007, \"name\": \"FA-A 00003-00001848\", \"partner_id\": [103, \"Agro Pampa SA\"], \"invoice_date\": \"2026-05-03\", \"invoice_date_due\": \"2026-06-02\", \"amount_total\": 3706864.09, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20008, \"name\": \"FA-A 00003-00001849\", \"partner_id\": [112, \"Farmacia Central\"], \"invoice_date\": \"2026-05-03\", \"invoice_date_due\": \"2026-06-02\", \"amount_total\": 2622501.83, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20009, \"name\": \"FA-A 00003-00001850\", \"partner_id\": [101, \"Ferretería Los Andes SA\"], \"invoice_date\": \"2026-05-07\", \"invoice_date_due\": \"2026-06-06\", \"amount_total\": 3154331.7, \"amount_residual\": 2250630.12, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"partial\"}, {\"id\": 20010, \"name\": \"FA-A 00003-00001851\", \"partner_id\": [111, \"Constructora Delta SRL\"], \"invoice_date\": \"2026-05-09\", \"invoice_date_due\": \"2026-06-08\", \"amount_total\": 1030790.54, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20011, \"name\": \"FA-A 00003-00001852\", \"partner_id\": [112, \"Farmacia Central\"], \"invoice_date\": \"2026-05-09\", \"invoice_date_due\": \"2026-06-08\", \"amount_total\": 18155.28, \"amount_residual\": 0.0, \"currency_id\": [2, \"USD\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20012, \"name\": \"FA-A 00003-00001853\", \"partner_id\": [108, \"Bodega Altos del Valle\"], \"invoice_date\": \"2026-05-10\", \"invoice_date_due\": \"2026-06-09\", \"amount_total\": 1111356.01, \"amount_residual\": 1111356.01, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20013, \"name\": \"FA-A 00003-00001854\", \"partner_id\": [111, \"Constructora Delta SRL\"], \"invoice_date\": \"2026-05-12\", \"invoice_date_due\": \"2026-06-11\", \"amount_total\": 826552.28, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20014, \"name\": \"FA-A 00003-00001855\", \"partner_id\": [112, \"Farmacia Central\"], \"invoice_date\": \"2026-05-12\", \"invoice_date_due\": \"2026-06-11\", \"amount_total\": 7540.79, \"amount_residual\": 0.0, \"currency_id\": [2, \"USD\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20015, \"name\": \"FA-A 00003-00001856\", \"partner_id\": [102, \"Distribuidora Río Negro SRL\"], \"invoice_date\": \"2026-05-13\", \"invoice_date_due\": \"2026-06-12\", \"amount_total\": 3389486.1, \"amount_residual\": 2479054.19, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"partial\"}, {\"id\": 20016, \"name\": \"FA-A 00003-00001857\", \"partner_id\": [106, \"Transportes Cuyo SA\"], \"invoice_date\": \"2026-05-13\", \"invoice_date_due\": \"2026-06-12\", \"amount_total\": 2222140.19, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20017, \"name\": \"FA-A 00003-00001858\", \"partner_id\": [112, \"Farmacia Central\"], \"invoice_date\": \"2026-05-13\", \"invoice_date_due\": \"2026-06-12\", \"amount_total\": 11387.96, \"amount_residual\": 0.0, \"currency_id\": [2, \"USD\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20018, \"name\": \"FA-A 00003-00001859\", \"partner_id\": [101, \"Ferretería Los Andes SA\"], \"invoice_date\": \"2026-05-13\", \"invoice_date_due\": \"2026-06-12\", \"amount_total\": 85784.79, \"amount_residual\": 85784.79, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20019, \"name\": \"FA-A 00003-00001860\", \"partner_id\": [102, \"Distribuidora Río Negro SRL\"], \"invoice_date\": \"2026-05-14\", \"invoice_date_due\": \"2026-06-13\", \"amount_total\": 3146788.81, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20020, \"name\": \"FA-A 00003-00001861\", \"partner_id\": [107, \"Panificadora La Espiga\"], \"invoice_date\": \"2026-05-14\", \"invoice_date_due\": \"2026-06-13\", \"amount_total\": 3045449.58, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20021, \"name\": \"FA-A 00003-00001862\", \"partner_id\": [110, \"Clínica San Martín\"], \"invoice_date\": \"2026-05-14\", \"invoice_date_due\": \"2026-06-13\", \"amount_total\": 3514118.79, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20022, \"name\": \"FA-A 00003-00001863\", \"partner_id\": [112, \"Farmacia Central\"], \"invoice_date\": \"2026-05-17\", \"invoice_date_due\": \"2026-06-16\", \"amount_total\": 467107.79, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20023, \"name\": \"FA-A 00003-00001864\", \"partner_id\": [103, \"Agro Pampa SA\"], \"invoice_date\": \"2026-05-18\", \"invoice_date_due\": \"2026-06-17\", \"amount_total\": 8889.34, \"amount_residual\": 8889.34, \"currency_id\": [2, \"USD\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20024, \"name\": \"FA-A 00003-00001865\", \"partner_id\": [110, \"Clínica San Martín\"], \"invoice_date\": \"2026-05-18\", \"invoice_date_due\": \"2026-06-17\", \"amount_total\": 1325514.65, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20025, \"name\": \"FA-A 00003-00001866\", \"partner_id\": [107, \"Panificadora La Espiga\"], \"invoice_date\": \"2026-05-18\", \"invoice_date_due\": \"2026-06-17\", \"amount_total\": 2947009.02, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20026, \"name\": \"FA-A 00003-00001867\", \"partner_id\": [104, \"Lácteos del Sur SA\"], \"invoice_date\": \"2026-05-18\", \"invoice_date_due\": \"2026-06-17\", \"amount_total\": 4361556.35, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20027, \"name\": \"FA-A 00003-00001868\", \"partner_id\": [104, \"Lácteos del Sur SA\"], \"invoice_date\": \"2026-05-20\", \"invoice_date_due\": \"2026-06-19\", \"amount_total\": 193155.35, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20028, \"name\": \"FA-A 00003-00001869\", \"partner_id\": [107, \"Panificadora La Espiga\"], \"invoice_date\": \"2026-05-20\", \"invoice_date_due\": \"2026-06-19\", \"amount_total\": 1034981.26, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20029, \"name\": \"FA-A 00003-00001870\", \"partner_id\": [107, \"Panificadora La Espiga\"], \"invoice_date\": \"2026-05-22\", \"invoice_date_due\": \"2026-06-21\", \"amount_total\": 3622832.84, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20030, \"name\": \"FA-A 00003-00001871\", \"partner_id\": [102, \"Distribuidora Río Negro SRL\"], \"invoice_date\": \"2026-05-22\", \"invoice_date_due\": \"2026-06-21\", \"amount_total\": 4283413.52, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20031, \"name\": \"FA-A 00003-00001872\", \"partner_id\": [107, \"Panificadora La Espiga\"], \"invoice_date\": \"2026-05-23\", \"invoice_date_due\": \"2026-06-22\", \"amount_total\": 3682107.83, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20032, \"name\": \"FA-A 00003-00001873\", \"partner_id\": [109, \"Textil Norte SA\"], \"invoice_date\": \"2026-05-24\", \"invoice_date_due\": \"2026-06-23\", \"amount_total\": 1125100.16, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20034, \"name\": \"FA-A 00003-00001874\", \"partner_id\": [109, \"Textil Norte SA\"], \"invoice_date\": \"2026-05-25\", \"invoice_date_due\": \"2026-06-24\", \"amount_total\": 19128.85, \"amount_residual\": 0.0, \"currency_id\": [2, \"USD\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20035, \"name\": \"FA-A 00003-00001875\", \"partner_id\": [103, \"Agro Pampa SA\"], \"invoice_date\": \"2026-05-25\", \"invoice_date_due\": \"2026-06-24\", \"amount_total\": 1564360.46, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20036, \"name\": \"FA-A 00003-00001876\", \"partner_id\": [111, \"Constructora Delta SRL\"], \"invoice_date\": \"2026-05-26\", \"invoice_date_due\": \"2026-06-25\", \"amount_total\": 14039.55, \"amount_residual\": 14039.55, \"currency_id\": [2, \"USD\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20037, \"name\": \"FA-A 00003-00001877\", \"partner_id\": [111, \"Constructora Delta SRL\"], \"invoice_date\": \"2026-05-28\", \"invoice_date_due\": \"2026-06-27\", \"amount_total\": 3136266.66, \"amount_residual\": 852627.45, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"partial\"}, {\"id\": 20038, \"name\": \"FA-A 00003-00001878\", \"partner_id\": [110, \"Clínica San Martín\"], \"invoice_date\": \"2026-05-30\", \"invoice_date_due\": \"2026-06-29\", \"amount_total\": 1320258.19, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20039, \"name\": \"FA-A 00003-00001879\", \"partner_id\": [105, \"Metalúrgica Quilmes SRL\"], \"invoice_date\": \"2026-05-30\", \"invoice_date_due\": \"2026-06-29\", \"amount_total\": 2691965.54, \"amount_residual\": 2691965.54, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20040, \"name\": \"FA-A 00003-00001880\", \"partner_id\": [107, \"Panificadora La Espiga\"], \"invoice_date\": \"2026-05-30\", \"invoice_date_due\": \"2026-06-29\", \"amount_total\": 11622.27, \"amount_residual\": 11622.27, \"currency_id\": [2, \"USD\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20041, \"name\": \"FA-A 00003-00001881\", \"partner_id\": [109, \"Textil Norte SA\"], \"invoice_date\": \"2026-05-30\", \"invoice_date_due\": \"2026-06-29\", \"amount_total\": 4266394.84, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}]"
+  },
+  {
+    "role": "tool",
+    "tool_call_id": "call_006",
+    "content": "[{\"id\": 20086, \"name\": \"FA-A 00003-00001921\", \"partner_id\": [105, \"Metalúrgica Quilmes SRL\"], \"invoice_date\": \"2026-07-02\", \"invoice_date_due\": \"2026-08-01\", \"amount_total\": 2791822.43, \"amount_residual\": 2791822.43, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20087, \"name\": \"FA-A 00003-00001922\", \"partner_id\": [112, \"Farmacia Central\"], \"invoice_date\": \"2026-07-02\", \"invoice_date_due\": \"2026-08-01\", \"amount_total\": 11774.14, \"amount_residual\": 0.0, \"currency_id\": [2, \"USD\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20088, \"name\": \"FA-A 00003-00001923\", \"partner_id\": [107, \"Panificadora La Espiga\"], \"invoice_date\": \"2026-07-04\", \"invoice_date_due\": \"2026-08-03\", \"amount_total\": 1652657.72, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20089, \"name\": \"FA-A 00003-00001924\", \"partner_id\": [101, \"Ferretería Los Andes SA\"], \"invoice_date\": \"2026-07-04\", \"invoice_date_due\": \"2026-08-03\", \"amount_total\": 3439071.12, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20090, \"name\": \"FA-A 00003-00001925\", \"partner_id\": [108, \"Bodega Altos del Valle\"], \"invoice_date\": \"2026-07-05\", \"invoice_date_due\": \"2026-08-04\", \"amount_total\": 317321.68, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20091, \"name\": \"FA-A 00003-00001926\", \"partner_id\": [103, \"Agro Pampa SA\"], \"invoice_date\": \"2026-07-05\", \"invoice_date_due\": \"2026-08-04\", \"amount_total\": 1377440.38, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20092, \"name\": \"FA-A 00003-00001927\", \"partner_id\": [109, \"Textil Norte SA\"], \"invoice_date\": \"2026-07-05\", \"invoice_date_due\": \"2026-08-04\", \"amount_total\": 2546877.07, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20093, \"name\": \"FA-A 00003-00001928\", \"partner_id\": [105, \"Metalúrgica Quilmes SRL\"], \"invoice_date\": \"2026-07-05\", \"invoice_date_due\": \"2026-08-04\", \"amount_total\": 4450313.6, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20094, \"name\": \"FA-A 00003-00001929\", \"partner_id\": [102, \"Distribuidora Río Negro SRL\"], \"invoice_date\": \"2026-07-06\", \"invoice_date_due\": \"2026-08-05\", \"amount_total\": 812559.29, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20095, \"name\": \"FA-A 00003-00001930\", \"partner_id\": [111, \"Constructora Delta SRL\"], \"invoice_date\": \"2026-07-09\", \"invoice_date_due\": \"2026-08-08\", \"amount_total\": 9240.03, \"amount_residual\": 0.0, \"currency_id\": [2, \"USD\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20096, \"name\": \"FA-A 00003-00001931\", \"partner_id\": [105, \"Metalúrgica Quilmes SRL\"], \"invoice_date\": \"2026-07-09\", \"invoice_date_due\": \"2026-08-08\", \"amount_total\": 1164999.75, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20097, \"name\": \"FA-A 00003-00001932\", \"partner_id\": [108, \"Bodega Altos del Valle\"], \"invoice_date\": \"2026-07-10\", \"invoice_date_due\": \"2026-08-09\", \"amount_total\": 188566.06, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20098, \"name\": \"FA-A 00003-00001933\", \"partner_id\": [108, \"Bodega Altos del Valle\"], \"invoice_date\": \"2026-07-11\", \"invoice_date_due\": \"2026-08-10\", \"amount_total\": 2803633.79, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20099, \"name\": \"FA-A 00003-00001934\", \"partner_id\": [111, \"Constructora Delta SRL\"], \"invoice_date\": \"2026-07-11\", \"invoice_date_due\": \"2026-08-10\", \"amount_total\": 12128.39, \"amount_residual\": 0.0, \"currency_id\": [2, \"USD\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20100, \"name\": \"FA-A 00003-00001935\", \"partner_id\": [109, \"Textil Norte SA\"], \"invoice_date\": \"2026-07-12\", \"invoice_date_due\": \"2026-08-11\", \"amount_total\": 1247161.38, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20101, \"name\": \"FA-A 00003-00001936\", \"partner_id\": [107, \"Panificadora La Espiga\"], \"invoice_date\": \"2026-07-13\", \"invoice_date_due\": \"2026-08-12\", \"amount_total\": 4461328.78, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20103, \"name\": \"FA-A 00003-00001937\", \"partner_id\": [105, \"Metalúrgica Quilmes SRL\"], \"invoice_date\": \"2026-07-15\", \"invoice_date_due\": \"2026-08-14\", \"amount_total\": 473816.04, \"amount_residual\": 473816.04, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20104, \"name\": \"FA-A 00003-00001938\", \"partner_id\": [102, \"Distribuidora Río Negro SRL\"], \"invoice_date\": \"2026-07-16\", \"invoice_date_due\": \"2026-08-15\", \"amount_total\": 3442954.78, \"amount_residual\": 1489658.08, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"partial\"}, {\"id\": 20105, \"name\": \"FA-A 00003-00001939\", \"partner_id\": [103, \"Agro Pampa SA\"], \"invoice_date\": \"2026-07-17\", \"invoice_date_due\": \"2026-08-16\", \"amount_total\": 22708.69, \"amount_residual\": 0.0, \"currency_id\": [2, \"USD\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20107, \"name\": \"FA-A 00003-00001940\", \"partner_id\": [106, \"Transportes Cuyo SA\"], \"invoice_date\": \"2026-07-19\", \"invoice_date_due\": \"2026-08-18\", \"amount_total\": 2391659.64, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20108, \"name\": \"FA-A 00003-00001941\", \"partner_id\": [109, \"Textil Norte SA\"], \"invoice_date\": \"2026-07-20\", \"invoice_date_due\": \"2026-08-19\", \"amount_total\": 3040561.34, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20109, \"name\": \"FA-A 00003-00001942\", \"partner_id\": [107, \"Panificadora La Espiga\"], \"invoice_date\": \"2026-07-20\", \"invoice_date_due\": \"2026-08-19\", \"amount_total\": 4288625.46, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20110, \"name\": \"FA-A 00003-00001943\", \"partner_id\": [108, \"Bodega Altos del Valle\"], \"invoice_date\": \"2026-07-21\", \"invoice_date_due\": \"2026-08-20\", \"amount_total\": 978791.73, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20111, \"name\": \"FA-A 00003-00001944\", \"partner_id\": [107, \"Panificadora La Espiga\"], \"invoice_date\": \"2026-07-22\", \"invoice_date_due\": \"2026-08-21\", \"amount_total\": 3914246.78, \"amount_residual\": 3914246.78, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20112, \"name\": \"FA-A 00003-00001945\", \"partner_id\": [110, \"Clínica San Martín\"], \"invoice_date\": \"2026-07-22\", \"invoice_date_due\": \"2026-08-21\", \"amount_total\": 12449.24, \"amount_residual\": 0.0, \"currency_id\": [2, \"USD\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20113, \"name\": \"FA-A 00003-00001946\", \"partner_id\": [101, \"Ferretería Los Andes SA\"], \"invoice_date\": \"2026-07-23\", \"invoice_date_due\": \"2026-08-22\", \"amount_total\": 584431.51, \"amount_residual\": 358742.84, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"partial\"}, {\"id\": 20114, \"name\": \"FA-A 00003-00001947\", \"partner_id\": [109, \"Textil Norte SA\"], \"invoice_date\": \"2026-07-26\", \"invoice_date_due\": \"2026-08-25\", \"amount_total\": 3125048.81, \"amount_residual\": 3125048.81, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20116, \"name\": \"FA-A 00003-00001948\", \"partner_id\": [112, \"Farmacia Central\"], \"invoice_date\": \"2026-07-26\", \"invoice_date_due\": \"2026-08-25\", \"amount_total\": 989768.44, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20117, \"name\": \"FA-A 00003-00001949\", \"partner_id\": [102, \"Distribuidora Río Negro SRL\"], \"invoice_date\": \"2026-07-28\", \"invoice_date_due\": \"2026-08-27\", \"amount_total\": 12564.9, \"amount_residual\": 0.0, \"currency_id\": [2, \"USD\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20118, \"name\": \"FA-A 00003-00001950\", \"partner_id\": [104, \"Lácteos del Sur SA\"], \"invoice_date\": \"2026-07-29\", \"invoice_date_due\": \"2026-08-28\", \"amount_total\": 1221.92, \"amount_residual\": 1221.92, \"currency_id\": [2, \"USD\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20119, \"name\": \"FA-A 00003-00001951\", \"partner_id\": [110, \"Clínica San Martín\"], \"invoice_date\": \"2026-07-30\", \"invoice_date_due\": \"2026-08-29\", \"amount_total\": 1043876.69, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20120, \"name\": \"FA-A 00003-00001952\", \"partner_id\": [103, \"Agro Pampa SA\"], \"invoice_date\": \"2026-07-31\", \"invoice_date_due\": \"2026-08-30\", \"amount_total\": 10216.36, \"amount_residual\": 0.0, \"currency_id\": [2, \"USD\"], \"state\": \"posted\", \"payment_state\": \"paid\"}]"
+  },
+  {
+    "role": "assistant",
+    "content": "En mayo: 41 facturas por $ 77.242.710,56 y USD 90.764,04. En julio: 32 facturas por $ 51.527.534,27 y USD 92.303,67."
+  },
+  {
+    "role": "user",
+    "content": "Compará lo que nos debe Distribuidora Río Negro SRL con lo que nos debe Textil Norte SA"
+  },
+  {
+    "role": "assistant",
+    "content": null,
+    "tool_calls": [
+      {
+        "id": "call_007",
+        "type": "function",
+        "function": {
+          "name": "odoo_search_read",
+          "arguments": "{\"model\": \"account.move\", \"domain\": [[\"move_type\", \"=\", \"out_invoice\"], [\"partner_id\", \"=\", 102], [\"state\", \"=\", \"posted\"], [\"amount_residual\", \">\", 0]], \"fields\": [\"name\", \"partner_id\", \"invoice_date\", \"invoice_date_due\", \"amount_total\", \"amount_residual\", \"currency_id\", \"state\", \"payment_state\"], \"limit\": 80}"
+        }
+      },
+      {
+        "id": "call_008",
+        "type": "function",
+        "function": {
+          "name": "odoo_search_read",
+          "arguments": "{\"model\": \"account.move\", \"domain\": [[\"move_type\", \"=\", \"out_invoice\"], [\"partner_id\", \"=\", 109], [\"state\", \"=\", \"posted\"], [\"amount_residual\", \">\", 0]], \"fields\": [\"name\", \"partner_id\", \"invoice_date\", \"invoice_date_due\", \"amount_total\", \"amount_residual\", \"currency_id\", \"state\", \"payment_state\"], \"limit\": 80}"
+        }
+      }
+    ]
+  },
+  {
+    "role": "tool",
+    "tool_call_id": "call_007",
+    "content": "[{\"id\": 20015, \"name\": \"FA-A 00003-00001856\", \"partner_id\": [102, \"Distribuidora Río Negro SRL\"], \"invoice_date\": \"2026-05-13\", \"invoice_date_due\": \"2026-06-12\", \"amount_total\": 3389486.1, \"amount_residual\": 2479054.19, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"partial\"}, {\"id\": 20061, \"name\": \"FA-A 00003-00001898\", \"partner_id\": [102, \"Distribuidora Río Negro SRL\"], \"invoice_date\": \"2026-06-11\", \"invoice_date_due\": \"2026-07-11\", \"amount_total\": 1774696.35, \"amount_residual\": 1774696.35, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20104, \"name\": \"FA-A 00003-00001938\", \"partner_id\": [102, \"Distribuidora Río Negro SRL\"], \"invoice_date\": \"2026-07-16\", \"invoice_date_due\": \"2026-08-15\", \"amount_total\": 3442954.78, \"amount_residual\": 1489658.08, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"partial\"}, {\"id\": 20212, \"name\": \"FA-A 00003-00002040\", \"partner_id\": [102, \"Distribuidora Río Negro SRL\"], \"invoice_date\": \"2026-10-18\", \"invoice_date_due\": \"2026-11-17\", \"amount_total\": 3565446.66, \"amount_residual\": 3565446.66, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20228, \"name\": \"FA-A 00003-00002056\", \"partner_id\": [102, \"Distribuidora Río Negro SRL\"], \"invoice_date\": \"2026-11-01\", \"invoice_date_due\": \"2026-12-01\", \"amount_total\": 3690591.8, \"amount_residual\": 2119262.06, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"partial\"}]"
+  },
+  {
+    "role": "tool",
+    "tool_call_id": "call_008",
+    "content": "[{\"id\": 20057, \"name\": \"FA-A 00003-00001894\", \"partner_id\": [109, \"Textil Norte SA\"], \"invoice_date\": \"2026-06-10\", \"invoice_date_due\": \"2026-07-10\", \"amount_total\": 1293836.89, \"amount_residual\": 1293836.89, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20114, \"name\": \"FA-A 00003-00001947\", \"partner_id\": [109, \"Textil Norte SA\"], \"invoice_date\": \"2026-07-26\", \"invoice_date_due\": \"2026-08-25\", \"amount_total\": 3125048.81, \"amount_residual\": 3125048.81, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20138, \"name\": \"FA-A 00003-00001969\", \"partner_id\": [109, \"Textil Norte SA\"], \"invoice_date\": \"2026-08-15\", \"invoice_date_due\": \"2026-09-14\", \"amount_total\": 2011833.49, \"amount_residual\": 2011833.49, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20186, \"name\": \"FA-A 00003-00002015\", \"partner_id\": [109, \"Textil Norte SA\"], \"invoice_date\": \"2026-09-26\", \"invoice_date_due\": \"2026-10-26\", \"amount_total\": 2620799.7, \"amount_residual\": 2620799.7, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20188, \"name\": \"FA-A 00003-00002017\", \"partner_id\": [109, \"Textil Norte SA\"], \"invoice_date\": \"2026-09-28\", \"invoice_date_due\": \"2026-10-28\", \"amount_total\": 1888677.79, \"amount_residual\": 1888677.79, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}]"
+  },
+  {
+    "role": "assistant",
+    "content": "Distribuidora Río Negro SRL debe $ 11.428.117,34 en 5 facturas. Textil Norte SA debe $ 10.940.196,68 en 5 facturas."
+  },
+  {
+    "role": "user",
+    "content": "¿Metalúrgica Quilmes SRL y Clínica San Martín tienen facturas vencidas?"
+  },
+  {
+    "role": "assistant",
+    "content": null,
+    "tool_calls": [
+      {
+        "id": "call_009",
+        "type": "function",
+        "function": {
+          "name": "odoo_search_read",
+          "arguments": "{\"model\": \"account.move\", \"domain\": [[\"move_type\", \"=\", \"out_invoice\"], [\"partner_id\", \"=\", 105], [\"state\", \"=\", \"posted\"], [\"amount_residual\", \">\", 0], [\"invoice_date_due\", \"<\", \"2026-11-03\"]], \"fields\": [\"name\", \"partner_id\", \"invoice_date\", \"invoice_date_due\", \"amount_total\", \"amount_residual\", \"currency_id\", \"state\", \"payment_state\"], \"limit\": 80}"
+        }
+      },
+      {
+        "id": "call_010",
+        "type": "function",
+        "function": {
+          "name": "odoo_search_read",
+          "arguments": "{\"model\": \"account.move\", \"domain\": [[\"move_type\", \"=\", \"out_invoice\"], [\"partner_id\", \"=\", 110], [\"state\", \"=\", \"posted\"], [\"amount_residual\", \">\", 0], [\"invoice_date_due\", \"<\", \"2026-11-03\"]], \"fields\": [\"name\", \"partner_id\", \"invoice_date\", \"invoice_date_due\", \"amount_total\", \"amount_residual\", \"currency_id\", \"state\", \"payment_state\"], \"limit\": 80}"
+        }
+      }
+    ]
+  },
+  {
+    "role": "tool",
+    "tool_call_id": "call_009",
+    "content": "[{\"id\": 20039, \"name\": \"FA-A 00003-00001879\", \"partner_id\": [105, \"Metalúrgica Quilmes SRL\"], \"invoice_date\": \"2026-05-30\", \"invoice_date_due\": \"2026-06-29\", \"amount_total\": 2691965.54, \"amount_residual\": 2691965.54, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20063, \"name\": \"FA-A 00003-00001900\", \"partner_id\": [105, \"Metalúrgica Quilmes SRL\"], \"invoice_date\": \"2026-06-12\", \"invoice_date_due\": \"2026-07-12\", \"amount_total\": 1414471.24, \"amount_residual\": 1414471.24, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20079, \"name\": \"FA-A 00003-00001915\", \"partner_id\": [105, \"Metalúrgica Quilmes SRL\"], \"invoice_date\": \"2026-06-22\", \"invoice_date_due\": \"2026-07-22\", \"amount_total\": 4144313.48, \"amount_residual\": 4144313.48, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20086, \"name\": \"FA-A 00003-00001921\", \"partner_id\": [105, \"Metalúrgica Quilmes SRL\"], \"invoice_date\": \"2026-07-02\", \"invoice_date_due\": \"2026-08-01\", \"amount_total\": 2791822.43, \"amount_residual\": 2791822.43, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20103, \"name\": \"FA-A 00003-00001937\", \"partner_id\": [105, \"Metalúrgica Quilmes SRL\"], \"invoice_date\": \"2026-07-15\", \"invoice_date_due\": \"2026-08-14\", \"amount_total\": 473816.04, \"amount_residual\": 473816.04, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20133, \"name\": \"FA-A 00003-00001964\", \"partner_id\": [105, \"Metalúrgica Quilmes SRL\"], \"invoice_date\": \"2026-08-13\", \"invoice_date_due\": \"2026-09-12\", \"amount_total\": 22437.54, \"amount_residual\": 22437.54, \"currency_id\": [2, \"USD\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20189, \"name\": \"FA-A 00003-00002018\", \"partner_id\": [105, \"Metalúrgica Quilmes SRL\"], \"invoice_date\": \"2026-09-28\", \"invoice_date_due\": \"2026-10-28\", \"amount_total\": 335905.46, \"amount_residual\": 97558.31, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"partial\"}]"
+  },
+  {
+    "role": "tool",
+    "tool_call_id": "call_010",
+    "content": "[{\"id\": 20181, \"name\": \"FA-A 00003-00002010\", \"partner_id\": [110, \"Clínica San Martín\"], \"invoice_date\": \"2026-09-22\", \"invoice_date_due\": \"2026-10-22\", \"amount_total\": 12768.71, \"amount_residual\": 12768.71, \"currency_id\": [2, \"USD\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}]"
+  },
+  {
+    "role": "assistant",
+    "content": "Metalúrgica Quilmes SRL: 7 vencidas por $ 11.613.947,04 y USD 22.437,54 (FA-A 00003-00001879, FA-A 00003-00001900). Clínica San Martín: 1 vencidas por USD 12.768,71 (FA-A 00003-00002010)."
+  },
+  {
+    "role": "user",
+    "content": "¿Qué quiere decir pago parcial?"
+  },
+  {
+    "role": "assistant",
+    "content": "Que el cliente pagó una parte de la factura y queda saldo. El saldo es amount_residual."
+  },
+  {
+    "role": "user",
+    "content": "Mostrame las facturas de Panificadora La Espiga de los últimos tres meses"
+  },
+  {
+    "role": "assistant",
+    "content": null,
+    "tool_calls": [
+      {
+        "id": "call_011",
+        "type": "function",
+        "function": {
+          "name": "odoo_search_read",
+          "arguments": "{\"model\": \"account.move\", \"domain\": [[\"move_type\", \"=\", \"out_invoice\"], [\"partner_id\", \"=\", 107], [\"invoice_date\", \">=\", \"2026-08-01\"]], \"fields\": [\"name\", \"partner_id\", \"invoice_date\", \"invoice_date_due\", \"amount_total\", \"amount_residual\", \"currency_id\", \"state\", \"payment_state\"], \"limit\": 80}"
+        }
+      }
+    ]
+  },
+  {
+    "role": "tool",
+    "tool_call_id": "call_011",
+    "content": "[{\"id\": 20158, \"name\": \"FA-A 00003-00001989\", \"partner_id\": [107, \"Panificadora La Espiga\"], \"invoice_date\": \"2026-09-02\", \"invoice_date_due\": \"2026-10-02\", \"amount_total\": 1047997.08, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20185, \"name\": \"FA-A 00003-00002014\", \"partner_id\": [107, \"Panificadora La Espiga\"], \"invoice_date\": \"2026-09-25\", \"invoice_date_due\": \"2026-10-25\", \"amount_total\": 2805702.75, \"amount_residual\": 2805702.75, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20196, \"name\": \"FA-A 00003-00002024\", \"partner_id\": [107, \"Panificadora La Espiga\"], \"invoice_date\": \"2026-10-03\", \"invoice_date_due\": \"2026-11-02\", \"amount_total\": 103112.06, \"amount_residual\": 0.0, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"paid\"}, {\"id\": 20199, \"name\": \"FA-A 00003-00002027\", \"partner_id\": [107, \"Panificadora La Espiga\"], \"invoice_date\": \"2026-10-06\", \"invoice_date_due\": \"2026-11-05\", \"amount_total\": 1220575.42, \"amount_residual\": 1220575.42, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20226, \"name\": \"FA-A 00003-00002054\", \"partner_id\": [107, \"Panificadora La Espiga\"], \"invoice_date\": \"2026-10-30\", \"invoice_date_due\": \"2026-11-29\", \"amount_total\": 1956294.46, \"amount_residual\": 1956294.46, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}, {\"id\": 20227, \"name\": \"FA-A 00003-00002055\", \"partner_id\": [107, \"Panificadora La Espiga\"], \"invoice_date\": \"2026-10-31\", \"invoice_date_due\": \"2026-11-30\", \"amount_total\": 1077843.12, \"amount_residual\": 1077843.12, \"currency_id\": [19, \"ARS\"], \"state\": \"posted\", \"payment_state\": \"not_paid\"}]"
+  },
+  {
+    "role": "assistant",
+    "content": "Panificadora La Espiga tiene 6 facturas desde agosto, por $ 8.211.524,89. Las últimas: FA-A 00003-00002055, FA-A 00003-00002054, FA-A 00003-00002027."
+  },
+  {
+    "role": "user",
+    "content": "Pasame todas las facturas vencidas que vimos, con número y saldo, para cobranzas."
+  }
+]
